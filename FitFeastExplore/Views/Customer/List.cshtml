@@ -1,0 +1,23 @@
+﻿@model IEnumerable<FitFeastExplore.Models.CustomerDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Customer List</h2>
+    <form method="get" action="/Customer/List">
+        <div class="input-group mb-3">
+            <input type="text" name="searchString" class="form-control" value="@ViewBag.search" placeholder="Search by customer name..." />
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+
+    <div class="list-group">
+        @foreach (var customer in Model)
+        {
+            <a href="/Customer/Show/@customer.CustomerId" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">@customer.CustomerName</h5>
+            </a>
+        }
+    </div>
+</div>

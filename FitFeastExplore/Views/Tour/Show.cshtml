@@ -1,0 +1,47 @@
+﻿@model FitFeastExplore.Models.View_Models.TourBookings
+@{
+    ViewBag.Title = "Show";
+}
+
+<a class="btn btn-success my-3" href="/Tour/List">Go back to Tours list</a>
+
+<div class="container mt-2 mb-5">
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h2 class="card-title"><span class="fw-bold">@Model.SelectedTour.Tourname</span></h2>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><span class="fw-bold">Description:</span> @Model.SelectedTour.Description</p>
+            <p class="card-text"><span class="fw-bold">Location:</span> @Model.SelectedTour.Location</p>
+            <p class="card-text"><span class="fw-bold">Price:</span> $ @Model.SelectedTour.Price</p>
+            <div class="row">
+                <div class="col-md-8">
+                    <a href="/Tour/DeleteConfirm/@Model.SelectedTour.Tourid" class="btn btn-danger me-2">Delete</a>
+                    <a href="/Tour/Edit/@Model.SelectedTour.Tourid" class="btn btn-primary">Update</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title text-warning p-2">Booked by @Model.RelatedCustomers.Count() customers</h4>
+                <p class="card-text"><span class="fw-bold">@Model.SelectedTour.Tourname</span> has been booked by the following customers:</p>
+                <ul class="list-group">
+                    @if (Model.RelatedCustomers.Any())
+                    {
+                        foreach (var customer in Model.RelatedCustomers)
+                        {
+                            <li class="list-group-item"><a class="fs-5 text-decoration-none text-danger" href="/Customer/Show/@customer.CustomerId">@customer.CustomerName</a></li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item text-danger">No customers have booked this tour yet!</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@model FitFeastExplore.Models.BookingDto
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>Edit Booking</h2>
+        </div>
+        <div class="card-body">
+            <form action="/Booking/Update/@Model.BookingId" method="POST">
+                <input type="hidden" name="BookingId" value="@Model.BookingId" />
+                <div class="form-group">
+                    <label for="BookingDate">Booking Date:</label>
+                    <input type="text" class="form-control" id="BookingDate" name="BookingDate" value="@Model.Bookingdate" />
+                </div>
+                <div class="form-group">
+                    <label for="Status">Status:</label>
+                    <input type="text" class="form-control" id="Status" name="Status" value="@Model.Status" />
+                </div>
+                <div class="form-group">
+                    <label for="CustomerId">Customer Id:</label>
+                    <input type="text" class="form-control" id="CustomerId" name="CustomerId" value="@Model.CustomerId" />
+                </div>
+                <div class="form-group">
+                    <label for="TourId">Tour Id:</label>
+                    <input type="text" class="form-control" id="TourId" name="TourId" value="@Model.TourId" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Update Booking" />
+                    <a href="/Booking/List" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main aria-labelledby="title">
+    <section class="row">
+        <h1 id="title">Fit,Feast & Explore</h1>
+        <p class="lead">Manage tours, recipes, and workouts with ease using our system.</p>
+    </section>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Fit</h2>
+                    <p class="card-text">Manage and view all tours offered.</p>
+                    <a href="/Tour/List" class="btn btn-primary btn-md">View Workouts &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Feast</h2>
+                    <p class="card-text">Manage customer information and bookings.</p>
+                    <a href="/Customer/List" class="btn btn-primary btn-md">View Recipes &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Explore</h2>
+                    <p class="card-text">Manage bookings for tours.</p>
+                    <a href="/Home/Tours" class="btn btn-primary btn-md">View Tours &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

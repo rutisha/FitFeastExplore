@@ -1,0 +1,38 @@
+﻿@model FitFeastExplore.Models.TourDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title fw-bold">Edit Tour</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/Tour/Update/@Model.Tourid" method="POST">
+                        <input type="hidden" name="TourId" value="@Model.Tourid" />
+                        <div class="mb-3">
+                            <label for="TourName" class="form-label">Tour Name:</label>
+                            <input type="text" class="form-control" id="TourName" name="TourName" value="@Model.Tourname" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Description" class="form-label">Description:</label>
+                            <input type="text" class="form-control" id="Description" name="Description" value="@Model.Description" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Location" class="form-label">Location:</label>
+                            <input type="text" class="form-control" id="Location" name="Location" value="@Model.Location" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Price" class="form-label">Price:</label>
+                            <input type="number" class="form-control" id="Price" name="Price" value="@Model.Price" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Tour</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
