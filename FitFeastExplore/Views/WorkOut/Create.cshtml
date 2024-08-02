@@ -1,0 +1,78 @@
+﻿﻿@model FitFeastExplore.Models.WorkOutDto
+@{
+    ViewBag.Title = "Create WorkOut";
+}
+
+<h2>Create WorkOut</h2>
+
+<form action="@Url.Action("Create", "WorkOut")" method="post">
+
+    <div id="maindiv">
+        <div id="nameFlex">
+            <label for="Name">Enter WorkOut Name:</label>
+            <div>
+                <input type="text" id="Name" name="Name" class="" />
+                <div>
+                    <span id="error"></span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <button type="submit" value="Create" class="btn btn-primary btn-md">Create &raquo;</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    window.onload = function () {
+        var btn = document.querySelector(".btn");
+        var name = document.getElementById("Name");
+        var error = document.getElementById("error");
+
+        btn.onclick = function (event) {
+            if (name.value.trim() === "") {
+                error.innerHTML = "This Field Is Required*";
+                error.focus;
+                return false;
+            }
+        }
+    }
+</script>
+
+
+<style>
+
+    body {
+        text-align: center;
+        font-size: 18px;
+        color: black;
+    }
+
+    #maindiv {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input {
+        margin-top: 10px;
+        font-size: 18px;
+        color: black;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+
+    #error {
+        font-size: 18px;
+        color: red;
+    }
+
+    .btn {
+        margin-top: 20px;
+    }
+
+</style>

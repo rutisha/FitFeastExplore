@@ -1,0 +1,33 @@
+﻿﻿@model FitFeastExplore.Models.WorkOutDetailsViewModel
+
+@{
+    ViewBag.Title = "WorkOut Details";
+}
+
+<h2>@Model.WorkOut.Name</h2>
+
+<table class="table">
+    <tr>
+        <th>Exercise Name</th>
+        <th>Reps</th>
+        <th>Sets</th>
+        <th>Body Part</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var exercise in Model.Exercises)
+    {
+        <tr>
+            <td>@exercise.ExerciseName</td>
+            <td>@exercise.Reps</td>
+            <td>@exercise.sets</td>
+            <td>@exercise.BodyPart</td>
+            <td>
+                <a href="@Url.Action("Edit", "WorkOutPlan", new { id = exercise.ExerciseId })">Edit</a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete", "WorkOutPlan", new { id = exercise.ExerciseId })">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

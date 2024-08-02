@@ -13,6 +13,11 @@ namespace FitFeastExplore.Controllers
             return View();
         }
 
+        public ActionResult Fit()
+        {
+            return View();
+        }
+
         public ActionResult Tours()
         {
             return View();

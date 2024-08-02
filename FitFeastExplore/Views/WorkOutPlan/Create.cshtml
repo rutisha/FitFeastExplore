@@ -1,0 +1,80 @@
+﻿﻿@model FitFeastExplore.Models.WorkOutPlan
+
+@{
+    ViewBag.Title = "Create WorkOutPlan";
+}
+
+<h2>Create WorkOutPlan</h2>
+
+<form action="/WorkOutPlan/Create" method="post" class="form-horizontal">
+    <input type="hidden" name="WorkOutId" value="@Model.WorkOutId" />
+
+    <div id="maindiv">
+        <div id="nameFlex">
+            <label for="ExerciseName">Search for Exercise:</label>
+            <div>
+                <input type="text" id="searchString" name="searchString" class="" />
+                <button type="submit" value="Search" class="btn">Search</button>
+            </div>
+        </div>
+
+        <div>
+            <h3>Exercises List</h3>
+            @if (ViewBag.Exercises != null)
+            {
+                <ul>
+                    @foreach (var exercise in ViewBag.Exercises)
+                    {
+                        <li>
+                            <a href="@Url.Action("Show", "Exercise", new { id = exercise.ExerciseId })">@exercise.ExerciseName</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</form>
+
+<style>
+    body {
+        text-align: center;
+        font-size: 18px;
+        color: black;
+    }
+
+    #maindiv {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input {
+        margin-top: 10px;
+        font-size: 18px;
+        color: black;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+
+    .btn {
+        margin-top: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #FFE433;
+    }
+
+        .btn:hover {
+            background-color: #ffef83;
+            border: 1px solid black;
+            border-radius: 5px;
+            color: black;
+        }
+</style>

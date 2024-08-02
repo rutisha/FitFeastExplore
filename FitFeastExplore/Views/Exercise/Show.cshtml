@@ -1,0 +1,54 @@
+﻿﻿@model FitFeastExplore.Models.ExerciseWorkOutViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Show Exercise</title>
+</head>
+<body>
+    <div class="card mb-3">
+        <div class="card-header bg-primary text-white">
+            <h2 class="card-title">@Model.Exercise.ExerciseName</h2>
+        </div>
+        <p>Reps: @Model.Exercise.Reps</p>
+        <p>Sets: @Model.Exercise.sets</p>
+        <p>Body Part: @Model.Exercise.BodyPart</p>
+
+        <form action="/Exercise/AddToWorkoutPlan" method="post">
+            <input type="hidden" name="Exercise.ExerciseId" value="@Model.Exercise.ExerciseId" />
+            <input type="hidden" name="Exercise.ExerciseName" value="@Model.Exercise.ExerciseName" />
+            <input type="hidden" name="Exercise.Reps" value="@Model.Exercise.Reps" />
+            <input type="hidden" name="Exercise.sets" value="@Model.Exercise.sets" />
+            <input type="hidden" name="Exercise.BodyPart" value="@Model.Exercise.BodyPart" />
+
+            <label for="WorkOutId">Select Workout:</label>
+            <select name="WorkOutId" id="WorkOutId" required>
+                @foreach (var workout in Model.WorkOuts)
+                {
+                    <option value="@workout.Value">@workout.Text</option>
+                }
+            </select>
+            <div>
+                <button type="submit" class="btn btn-primary btn-md"> Add Exercise &raquo;</button>
+            </div>
+        </form>
+       </div>
+
+    
+</body>
+</html>
+
+<style>
+    * {
+        text-align: center;
+    }
+
+    .card-header {
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>

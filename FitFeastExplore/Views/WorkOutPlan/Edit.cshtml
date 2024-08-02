@@ -1,0 +1,61 @@
+﻿﻿@model FitFeastExplore.Models.WorkOutPlanDto
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit WorkOut Plan</title>
+</head>
+<body>
+    <h2>Edit WorkOut Plan</h2>
+    <form class="card mb-3" action="/WorkOutPlan/Edit" method="post">
+        <input type="hidden" name="WorkOutPlanID" value="@Model.WorkOutPlanID" />
+
+        <div>
+            <label for="ExerciseName">Exercise Name</label>
+            <input type="text" id="ExerciseName" name="ExerciseName" value="@Model.ExerciseName" />
+        </div>
+        <div>
+            <label for="Reps">Reps</label>
+            <input type="number" id="Reps" name="Reps" value="@Model.Reps" />
+        </div>
+        <div>
+            <label for="Sets">Sets</label>
+            <input type="number" id="Sets" name="Sets" value="@Model.sets" />
+        </div>
+        <div>
+            <label for="BodyPart">Body Part</label>
+            <input type="text" id="BodyPart" name="BodyPart" value="@Model.BodyPart" />
+        </div>
+        <div>
+            <label for="Notes">Notes</label>
+            <input type="text" id="Notes" name="Notes" value="@Model.Notes" />
+        </div>
+
+        <div>
+            <button class="btn btn-primary btn-md" type="submit" value="Save">Save &raquo;</button>
+        </div>
+    </form>
+
+    <div>
+        <a href="/WorkOut/Details/@Model.WorkOutPlanID">Back to Details</a>
+    </div>
+</body>
+</html>
+
+<style>
+    * {
+        text-align: center;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    label {
+        padding-top: 10px;
+    }
+
+    .btn {
+        margin-top: 20px;
+    }
+</style>

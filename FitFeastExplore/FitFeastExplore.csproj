@@ -186,10 +186,16 @@
     <Compile Include="Controllers\BookingDataController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\CustomerDataController.cs" />
+    <Compile Include="Controllers\ExerciseController.cs" />
+    <Compile Include="Controllers\ExerciseDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Controllers\TourDataController.cs" />
+    <Compile Include="Controllers\WorkOutController.cs" />
+    <Compile Include="Controllers\WorkOutDataController.cs" />
+    <Compile Include="Controllers\WorkOutPlanController.cs" />
+    <Compile Include="Controllers\WorkOutPlanDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,16 +203,25 @@
     <Compile Include="Migrations\202407231340274_tour.designer.cs">
       <DependentUpon>202407231340274_tour.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202408011710412_fit.cs" />
+    <Compile Include="Migrations\202408011710412_fit.designer.cs">
+      <DependentUpon>202408011710412_fit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Exercise.cs" />
+    <Compile Include="Models\ExerciseWorkOutViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\View Models\CreateBooking.cs" />
     <Compile Include="Models\View Models\CustomerBookings.cs" />
     <Compile Include="Models\View Models\TourBookings.cs" />
+    <Compile Include="Models\WorkOut.cs" />
+    <Compile Include="Models\WorkOutDetailsViewModel.cs" />
+    <Compile Include="Models\WorkOutPlan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -301,9 +316,21 @@
     <Content Include="Views\Booking\Error.cshtml" />
     <Content Include="Views\Booking\DeleteConfirm.cshtml" />
     <Content Include="Views\Home\Tours.cshtml" />
+    <Content Include="Views\Exercise\List.cshtml" />
+    <Content Include="Views\Exercise\Show.cshtml" />
+    <Content Include="Views\WorkOut\Create.cshtml" />
+    <Content Include="Views\WorkOut\Delete.cshtml" />
+    <Content Include="Views\WorkOut\Details.cshtml" />
+    <Content Include="Views\WorkOut\Edit.cshtml" />
+    <Content Include="Views\WorkOut\List.cshtml" />
+    <Content Include="Views\WorkOutPlan\Create.cshtml" />
+    <Content Include="Views\WorkOutPlan\Delete.cshtml" />
+    <Content Include="Views\WorkOutPlan\Edit.cshtml" />
+    <Content Include="Views\Home\Fit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ExerciseData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -335,6 +362,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202407231340274_tour.resx">
       <DependentUpon>202407231340274_tour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408011710412_fit.resx">
+      <DependentUpon>202408011710412_fit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
