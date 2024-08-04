@@ -1,0 +1,32 @@
+﻿@model FitFeastExplore.Models.IngredientDto
+@{
+    ViewBag.Title = "Show";
+}
+
+<div class="container mt-5">
+    <!-- Link to go back to the ingredients list page -->
+    <a href="/Ingredient/List" class="btn btn-secondary my-3">Go back to Ingredients list</a>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h2 class="card-title"><span class="fw-bold">Recipe Id: #@Model.IngredientId</span></h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><span class="fw-bold">Ingredient Name:</span> @Model.IngredientName</p>
+                    <p class="card-text"><span class="fw-bold">Quantity:</span> @Model.Quantity</p>
+
+                    <div class="row">
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <a href="/Ingredient/DeleteConfirm/@Model.IngredientId" class="btn btn-danger me-2">Delete</a>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-start">
+                            <a href="/Ingredient/Edit/@Model.IngredientId" class="btn btn-primary">Update</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

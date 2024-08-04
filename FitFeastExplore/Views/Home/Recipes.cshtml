@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Recipes";
+}
+
+<main aria-labelledby="title">
+    <section class="row">
+        <h1 id="tourManagementTitle">Recipe Management System</h1>
+        <p class="lead">Manage Your recipies by their category like Daily Recipes, Diet or Travel.</p>
+    </section>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Normal Recipes</h2>
+                    <p class="card-text">View and manage Normal recipes</p>
+                    <a href="/Recipe/ListByCategory?category=Normal" class="btn btn-primary btn-md">View Normal Recipes &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Diet Recipes</h2>
+                    <p class="card-text">Protein rich healthy recipes</p>
+                    <a href="/Recipe/ListByCategory?category=Diet" class="btn btn-primary btn-md">View Diet Recipes &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Travel Recipes</h2>
+                    <p class="card-text">Quick and easy to make recipes</p>
+                    <a href="/Recipe/ListByCategory?category=Travel" class="btn btn-primary btn-md">View Travel Recipes &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<FitFeastExplore.Models.RecipeDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Recipe List</h2>
+
+    <form method="get" action="/Recipe/List">
+        <div class="input-group mb-3">
+            <input type="text" name="searchString" class="form-control" value="@ViewBag.searchString" placeholder="Search by recipe name..." />
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+
+    @foreach (var Recipe in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title">
+                    <a href="/Recipe/Show/@Recipe.RecipeId" class="text-white">
+                        @Recipe.RecipeName - @Recipe.Category
+                    </a>
+                </h3>
+            </div>
+        </div>
+    }
+</div>

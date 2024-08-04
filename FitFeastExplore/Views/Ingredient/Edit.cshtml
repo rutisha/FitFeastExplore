@@ -1,0 +1,29 @@
+﻿@model FitFeastExplore.Models.IngredientDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>Edit Ingredient</h2>
+        </div>
+        <div class="card-body">
+            <form action="/Ingredient/Update/@Model.IngredientId" method="POST">
+                <input type="hidden" name="IngredientId" value="@Model.IngredientId" />
+                <div class="form-group">
+                    <label for="IngredientName">Ingredient Name :</label>
+                    <input type="text" class="form-control" id="IngredientName" name="IngredientName" value="@Model.IngredientName" />
+                </div>
+                <div class="form-group">
+                    <label for="Quantity">Quantity:</label>
+                    <input type="text" class="form-control" id="Quantity" name="Quantity" value="@Model.Quantity" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Update Ingredient" />
+                    <a href="/Ingredient/List" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

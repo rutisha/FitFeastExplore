@@ -1,0 +1,32 @@
+﻿@model IEnumerable<FitFeastExplore.Models.RecipeDto>
+@{
+    ViewBag.Title = "ListByCategory";
+    string category = ViewBag.Category;
+}
+
+<div class="container mt-5">
+    <a href="/Home/Recipes" class="btn btn-secondary my-3">Back to Recipes</a>
+    <a href="/Recipe/New" class="btn btn-success">Add New Recipe</a>
+
+    <h2 class="mb-4">@category Recipes</h2>
+
+    @foreach (var recipe in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title">
+                    <a href="/Recipe/Show/@recipe.RecipeId" class="text-white">
+                        @recipe.RecipeName
+                    </a>
+                </h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>Protein:</strong> @recipe.Protein</p>
+                <p class="card-text"><strong>Calories:</strong> @recipe.Calories</p>
+                <p class="card-text"><strong>Cooking Time:</strong> @recipe.CookingTime</p>
+                <p class="card-text"><strong>Instructions:</strong> @recipe.Instructions</p>
+                <p class="card-text"><strong>Ingredient:</strong> @recipe.IngredientName</p>
+            </div>
+        </div>
+    }
+</div>
