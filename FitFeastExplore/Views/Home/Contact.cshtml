@@ -1,19 +1,42 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    ViewBag.Message = "Get in Touch with Us";
 }
 <main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
+    <h2 id="title">@ViewBag.Title</h2>
     <h3>@ViewBag.Message</h3>
 
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+    <p>If you have any questions, feedback, or would like to get in touch with us, please use the contact information below. We would love to hear from you!</p>
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+    <h3>Contact Information</h3>
+    <ul>
+        <li><strong>Email:</strong> support@fitfeastexplore.com</li>
+        <li><strong>Phone:</strong> +1 (123) 456-7890</li>
+        <li><strong>Address:</strong> 123 Wellness Way, Health City, HT 12345</li>
+    </ul>
+
+    <h3>Follow Us</h3>
+    <p>Stay connected and follow us on our social media channels for the latest updates, tips, and inspiration:</p>
+    <ul>
+        <li><strong>Facebook:</strong> <a href="https://www.facebook.com/fitfeastexplore" target="_blank">FitFeast&Explore</a></li>
+        <li><strong>Twitter:</strong> <a href="https://twitter.com/fitfeastexplore" target="_blank">FitFeastExplore</a></li>
+        <li><strong>Instagram:</strong> <a href="https://www.instagram.com/fitfeastexplore" target="_blank">FitFeastExplore</a></li>
+    </ul>
+
+    <h3>Contact Form</h3>
+    <form action="/Home/index" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
 </main>

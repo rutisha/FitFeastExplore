@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title fw-bold">Create New Recipe</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/Recipe/Create" method="POST">
+                        <div class="mb-3">
+                            <label for="RecipeName" class="form-label">Recipe Name:</label>
+                            <input type="text" class="form-control" id="RecipeName" name="RecipeName" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Category" class="form-label">Category:</label>
+                            <input type="text" class="form-control" id="Category" name="Category" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Instructions" class="form-label">Instructions:</label>
+                            <input type="text" class="form-control" id="Instructions" name="Instructions" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Protein" class="form-label">Protein:</label>
+                            <input type="text" class="form-control" id="Protein" name="Protein" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Calories" class="form-label">Calories:</label>
+                            <input type="text" class="form-control" id="Calories" name="Calories" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="CookingTime" class="form-label">Cooking Time:</label>
+                            <input type="text" class="form-control" id="CookingTime" name="CookingTime" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="IngredientId" class="form-label">Ingredient Id:</label>
+                            <input type="number" class="form-control" id="IngredientId" name="IngredientId" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Recipe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

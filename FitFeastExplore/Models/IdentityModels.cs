@@ -26,14 +26,14 @@ namespace FitFeastExplore.Models
         }
 
         public DbSet<Tour> Tours { get; set; }
-
         public DbSet<Customer> Customers { get; set; }
-
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<WorkOut> WorkOuts { get; set; }
         public DbSet<WorkOutPlan> WorkOutPlans { get; set; }
-
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
