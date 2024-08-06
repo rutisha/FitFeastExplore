@@ -17,16 +17,15 @@ namespace FitFeastExplore.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         /// <summary>
-        /// Returns all bookings in the system.
+        /// Returns all ingredients in the system.
         /// </summary>
         /// <returns>
         /// HEADER: 200 (OK)
-        /// CONTENT: all bookings in the database.
+        /// CONTENT: all ingredients in the database.
         /// </returns>
         /// <example>
-        /// GET: api/Bookingdata/ListBookings
+        /// GET: api/IngredientData/ListIngredients
         /// </example>
-
         [HttpGet]
         public List<IngredientDto> ListIngredients()
         {
@@ -45,15 +44,15 @@ namespace FitFeastExplore.Controllers
         }
 
         /// <summary>
-        /// Gathers information about tour information related to a particular booking
+        /// Gathers information about a particular ingredient by its ID.
         /// </summary>
+        /// <param name="id">Ingredient ID.</param>
         /// <returns>
         /// HEADER: 200 (OK)
-        /// CONTENT: specific booking in the database.
+        /// CONTENT: specific ingredient in the database.
         /// </returns>
-        /// <param name="id">Booking ID.</param>
         /// <example>
-        /// GET: api/Bookingdata/FindBooking/2
+        /// GET: api/IngredientData/FindIngredient/2
         /// </example>
         [ResponseType(typeof(IngredientDto))]
         [HttpGet]
@@ -78,20 +77,19 @@ namespace FitFeastExplore.Controllers
         }
 
         /// <summary>
-        /// Adds an new booking to the system
+        /// Adds a new ingredient to the system.
         /// </summary>
-        /// <param name="booking">JSON FORM DATA of an booking</param>
+        /// <param name="Ingredient">JSON FORM DATA of an ingredient</param>
         /// <returns>
         /// HEADER: 201 (Created)
-        /// CONTENT: Booking ID, Booking Data
+        /// CONTENT: Ingredient ID, Ingredient Data
         /// or
         /// HEADER: 400 (Bad Request)
         /// </returns>
         /// <example>
-        /// // POST: api/BookingData/AddBooking
-        /// FORM DATA: Tour JSON Object
+        /// POST: api/IngredientData/AddIngredient
+        /// FORM DATA: Ingredient JSON Object
         /// </example>
-
         [ResponseType(typeof(Ingredient))]
         [HttpPost]
         [Route("api/IngredientData/AddIngredient")]
@@ -109,19 +107,18 @@ namespace FitFeastExplore.Controllers
         }
 
         /// <summary>
-        /// Deletes an booking from the system by it's ID.
+        /// Deletes an ingredient from the system by its ID.
         /// </summary>
-        /// <param name="id">The primary key of the booking</param>
+        /// <param name="id">The primary key of the ingredient</param>
         /// <returns>
         /// HEADER: 200 (OK)
         /// or
         /// HEADER: 404 (NOT FOUND)
         /// </returns>
         /// <example>
-        /// POST: api/BookingData/DeleteBooking/5
+        /// POST: api/IngredientData/DeleteIngredient/5
         /// FORM DATA: (empty)
         /// </example>
-
         [ResponseType(typeof(Ingredient))]
         [HttpPost]
         [Route("api/IngredientData/DeleteIngredient/{id}")]
@@ -140,10 +137,10 @@ namespace FitFeastExplore.Controllers
         }
 
         /// <summary>
-        /// Updates a particular booking in the system with POST Data input
+        /// Updates a particular ingredient in the system with POST Data input.
         /// </summary>
-        /// <param name="id">Represents the Booking ID primary key</param>
-        /// <param name="tour">JSON FORM DATA of an booking</param>
+        /// <param name="id">Represents the Ingredient ID primary key</param>
+        /// <param name="ingredient">JSON FORM DATA of an ingredient</param>
         /// <returns>
         /// HEADER: 204 (Success, No Content Response)
         /// or
@@ -152,10 +149,9 @@ namespace FitFeastExplore.Controllers
         /// HEADER: 404 (Not Found)
         /// </returns>
         /// <example>
-        /// POST: api/BookingData/UpdateBooking/5
-        /// FORM DATA: Tour JSON Object
+        /// POST: api/IngredientData/UpdateIngredient/3
+        /// FORM DATA: Ingredient JSON Object
         /// </example>
-
         [ResponseType(typeof(void))]
         [HttpPost]
         [Route("api/IngredientData/UpdateIngredient/{id}")]
@@ -202,18 +198,12 @@ namespace FitFeastExplore.Controllers
         }
 
         /// <summary>
-        /// Searches for bookings that match the given search string.
+        /// Searches for ingredients that match the given search string.
         /// </summary>
-        /// <param name="searchString">The search string to filter bookings.</param>
-        /// <returns>A list of BookingDto objects that match the search criteria.</returns>
+        /// <param name="searchString">The search string to filter ingredients.</param>
+        /// <returns>A list of IngredientDto objects that match the search criteria.</returns>
         /// <example>
-        /// GET: api/BookingData/SearchBookings?searchString=John =>
-        /// <BookingDto>
-        /// <BookingId>1</BookingId>
-        /// <CustomerId>123</CustomerId>
-        /// <TourId>456</TourId>
-        /// <BookingDate>2024-06-21</BookingDate>
-        /// </BookingDto>
+        /// GET: api/IngredientData/SearchIngredients?searchString=Salt
         /// </example>
         [HttpGet]
         [Route("api/IngredientData/SearchIngredients")]
@@ -230,6 +220,12 @@ namespace FitFeastExplore.Controllers
                 Quantity = i.Quantity
             }).ToList();
         }
+
+        /// <summary>
+        /// Checks if an ingredient exists in the database.
+        /// </summary>
+        /// <param name="id">The ID of the ingredient.</param>
+        /// <returns>True if the ingredient exists, false otherwise.</returns>
         private bool IngredientExists(int id)
         {
             return db.Ingredients.Count(e => e.IngredientId == id) > 0;
