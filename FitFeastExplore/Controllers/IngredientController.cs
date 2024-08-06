@@ -15,13 +15,16 @@ namespace FitFeastExplore.Controllers
         private static readonly HttpClient client;
         private JavaScriptSerializer jss = new JavaScriptSerializer();
 
+        // Static constructor to initialize the HttpClient
         static IngredientController()
         {
             client = new HttpClient();
+            // Set the base address of the API
             client.BaseAddress = new Uri("https://localhost:44306/api/");
         }
 
         // GET: Ingredient/List
+        // This action lists all ingredients or filters by search string if provided
         public ActionResult List(string searchString)
         {
             string url = "ingredientdata/listingredients";
@@ -38,7 +41,7 @@ namespace FitFeastExplore.Controllers
             return View(IngredientDtos);
         }
 
-        //GET: Ingredient/Show/3
+        //GET: Ingredient/Show/2
         public ActionResult Show(int id)
         {
             string url = "ingredientdata/findingredient/" + id;
@@ -78,12 +81,14 @@ namespace FitFeastExplore.Controllers
             }
         }
 
+        // This action returns an error view
         public ActionResult Error()
         {
             return View();
         }
 
-        // GET: Ingredient/Edit/5
+        // GET: Ingredient/Edit/3
+        // This action retrieves the ingredient data for editing by ID
         public ActionResult Edit(int id)
         {
             string url = "ingredientdata/findingredient/" + id;
@@ -97,7 +102,7 @@ namespace FitFeastExplore.Controllers
             return View(selectedingredient);
         }
 
-        // POST: Ingredient/Update/5
+        // POST: Ingredient/Update/3
         [HttpPost]
         public ActionResult Update(int id, Ingredient ingredient)
         {
@@ -132,7 +137,7 @@ namespace FitFeastExplore.Controllers
             }
         }
 
-        // GET: Ingredient/Delete/5
+        // GET: Ingredient/Delete/3
         public ActionResult Deleteconfirm(int id)
         {
             string url = "ingredientdata/findingredient/" + id;
@@ -144,7 +149,7 @@ namespace FitFeastExplore.Controllers
             return View(selectedingredient);
         }
 
-        // POST: Ingredients/Delete/5
+        // POST: Ingredients/Delete/3
         [HttpPost]
         public ActionResult Delete(int id)
         {

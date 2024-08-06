@@ -24,7 +24,7 @@ namespace FitFeastExplore.Controllers
         /// CONTENT: all recipes in the database.
         /// </returns>
         /// <example>
-        /// GET: api/Recipedata/Listrecipes
+        /// GET: api/RecipeData/ListRecipes
         /// </example>
 
         [HttpGet]
@@ -50,6 +50,18 @@ namespace FitFeastExplore.Controllers
             return RecipeDtos;
         }
 
+        /// <summary>
+        /// Returns all recipes in a specified category.
+        /// </summary>
+        /// <param name="category">The category of recipes.</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all recipes in the specified category.
+        /// </returns>
+        /// <example>
+        /// GET: api/RecipeData/ListRecipesByCategory/Healthy
+        /// </example>
+
         [HttpGet]
         [Route("api/RecipeData/ListRecipesByCategory/{category}")]
         public List<RecipeDto> ListRecipesByCategory(string category)
@@ -74,15 +86,17 @@ namespace FitFeastExplore.Controllers
 
 
         /// <summary>
-        /// Gathers information about tour information related to a particular booking
+        /// Gathers information about a specific recipe by its ID.
         /// </summary>
+        /// <param name="id">Recipe ID.</param>
         /// <returns>
         /// HEADER: 200 (OK)
-        /// CONTENT: specific booking in the database.
+        /// CONTENT: specific recipe in the database.
+        /// or
+        /// HEADER: 404 (Not Found)
         /// </returns>
-        /// <param name="id">Booking ID.</param>
         /// <example>
-        /// GET: api/Bookingdata/FindBooking/2
+        /// GET: api/RecipeData/FindRecipe/2
         /// </example>
         [ResponseType(typeof(RecipeDto))]
         [HttpGet]
@@ -113,18 +127,18 @@ namespace FitFeastExplore.Controllers
         }
 
         /// <summary>
-        /// Adds an new booking to the system
+        /// Adds a new recipe to the system.
         /// </summary>
-        /// <param name="booking">JSON FORM DATA of an booking</param>
+        /// <param name="recipe">JSON FORM DATA of a recipe</param>
         /// <returns>
         /// HEADER: 201 (Created)
-        /// CONTENT: Booking ID, Booking Data
+        /// CONTENT: Recipe ID, Recipe Data
         /// or
         /// HEADER: 400 (Bad Request)
         /// </returns>
         /// <example>
-        /// // POST: api/BookingData/AddBooking
-        /// FORM DATA: Tour JSON Object
+        /// POST: api/RecipeData/AddRecipe
+        /// FORM DATA: Recipe JSON Object
         /// </example>
 
         [ResponseType(typeof(Recipe))]
@@ -144,16 +158,16 @@ namespace FitFeastExplore.Controllers
         }
 
         /// <summary>
-        /// Deletes an booking from the system by it's ID.
+        /// Deletes a recipe from the system by its ID.
         /// </summary>
-        /// <param name="id">The primary key of the booking</param>
+        /// <param name="id">The primary key of the recipe</param>
         /// <returns>
         /// HEADER: 200 (OK)
         /// or
-        /// HEADER: 404 (NOT FOUND)
+        /// HEADER: 404 (Not Found)
         /// </returns>
         /// <example>
-        /// POST: api/BookingData/DeleteBooking/5
+        /// POST: api/RecipeData/DeleteRecipe/5
         /// FORM DATA: (empty)
         /// </example>
 
@@ -175,20 +189,20 @@ namespace FitFeastExplore.Controllers
         }
 
         /// <summary>
-        /// Updates a particular booking in the system with POST Data input
+        /// Updates a particular recipe in the system with POST Data input.
         /// </summary>
-        /// <param name="id">Represents the Booking ID primary key</param>
-        /// <param name="tour">JSON FORM DATA of an booking</param>
+        /// <param name="id">Represents the Recipe ID primary key</param>
+        /// <param name="recipe">JSON FORM DATA of a recipe</param>
         /// <returns>
-        /// HEADER: 204 (Success, No Content Response)
+        /// HEADER: 204 (No Content)
         /// or
         /// HEADER: 400 (Bad Request)
         /// or
         /// HEADER: 404 (Not Found)
         /// </returns>
         /// <example>
-        /// POST: api/BookingData/UpdateBooking/5
-        /// FORM DATA: Tour JSON Object
+        /// POST: api/RecipeData/UpdateRecipe/5
+        /// FORM DATA: Recipe JSON Object
         /// </example>
 
         [ResponseType(typeof(void))]
@@ -242,18 +256,18 @@ namespace FitFeastExplore.Controllers
         }
 
         /// <summary>
-        /// Searches for bookings that match the given search string.
+        /// Searches for recipes that match the given search string.
         /// </summary>
-        /// <param name="searchString">The search string to filter bookings.</param>
-        /// <returns>A list of BookingDto objects that match the search criteria.</returns>
+        /// <param name="searchString">The search string to filter recipes.</param>
+        /// <returns>A list of RecipeDto objects that match the search criteria.</returns>
         /// <example>
-        /// GET: api/BookingData/SearchBookings?searchString=John =>
-        /// <BookingDto>
-        /// <BookingId>1</BookingId>
-        /// <CustomerId>123</CustomerId>
-        /// <TourId>456</TourId>
-        /// <BookingDate>2024-06-21</BookingDate>
-        /// </BookingDto>
+        /// GET: api/RecipeData/SearchRecipes?searchString=Chocolate =>
+        /// <RecipeDto>
+        /// <RecipeId>1</RecipeId>
+        /// <RecipeName>Chocolate Cake</RecipeName>
+        /// <IngredientId>123</IngredientId>
+        /// <Category>Dessert</Category>
+        /// </RecipeDto>
         /// </example>
         [HttpGet]
         [Route("api/RecipeData/SearchRecipes")]

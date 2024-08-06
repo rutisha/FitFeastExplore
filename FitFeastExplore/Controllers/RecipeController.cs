@@ -23,6 +23,12 @@ namespace FitFeastExplore.Controllers
             client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:44306/api/");
         }
+
+        /// <summary>
+        /// Displays a list of all recipes, with optional search functionality.
+        /// </summary>
+        /// <param name="searchString">The search string to filter recipes.</param>
+        /// <returns>A view displaying a list of RecipeDto objects.</returns>
         // GET: Recipe/List
         public ActionResult List(string searchString)
         {
@@ -41,6 +47,12 @@ namespace FitFeastExplore.Controllers
             return View(RecipeDtos);
         }
 
+
+        /// <summary>
+        /// Displays a list of recipes filtered by category.
+        /// </summary>
+        /// <param name="category">The category to filter recipes by.</param>
+        /// <returns>A view displaying a list of RecipeDto objects filtered by category.</returns>
         public ActionResult ListByCategory(string category)
         {
             string url = $"recipedata/listrecipesbycategory/{category}";
@@ -52,8 +64,12 @@ namespace FitFeastExplore.Controllers
             return View(recipes);
         }
 
-
-        //GET: Recipe/Show/3
+        /// <summary>
+        /// Displays details for a specific recipe.
+        /// </summary>
+        /// <param name="id">The ID of the recipe to display.</param>
+        /// <returns>A view displaying the details of the specified RecipeDto object.</returns>
+        // GET: Recipe/Show/3
         public ActionResult Show(int id)
         {
             string url = "recipedata/findrecipe/" + id;
@@ -65,13 +81,21 @@ namespace FitFeastExplore.Controllers
             return View(Recipe);
         }
 
-        //Get: Recipe/New
+        /// <summary>
+        /// Displays the form to create a new recipe.
+        /// </summary>
+        /// <returns>A view displaying the form to create a new recipe.</returns>
+        // GET: Recipe/New
         public ActionResult New()
         {
             return View();
         }
 
-
+        /// <summary>
+        /// Handles the creation of a new recipe.
+        /// </summary>
+        /// <param name="recipe">The Recipe object to create.</param>
+        /// <returns>A redirect to the List action if successful, otherwise an Error view.</returns>
         // POST: Recipe/Create
         [HttpPost]
         public ActionResult Create(Recipe recipe)
@@ -100,12 +124,21 @@ namespace FitFeastExplore.Controllers
             }
         }
 
+        /// <summary>
+        /// Displays an error view.
+        /// </summary>
+        /// <returns>A view displaying an error message.</returns>
         public ActionResult Error()
         {
             return View();
         }
 
-        // GET: Recipe/Edit/5
+        /// <summary>
+        /// Displays the form to edit an existing recipe.
+        /// </summary>
+        /// <param name="id">The ID of the recipe to edit.</param>
+        /// <returns>A view displaying the form to edit the specified RecipeDto object.</returns>
+        // GET: Recipe/Edit/3
         public ActionResult Edit(int id)
         {
             string url = "recipedata/findrecipe/" + id;
@@ -119,7 +152,13 @@ namespace FitFeastExplore.Controllers
             return View(Recipe);
         }
 
-        // POST: Recipe/Update/5
+        /// <summary>
+        /// Handles the update of an existing recipe.
+        /// </summary>
+        /// <param name="id">The ID of the recipe to update.</param>
+        /// <param name="recipe">The updated Recipe object.</param>
+        /// <returns>A redirect to the Show action if successful, otherwise the Edit view.</returns>
+        // POST: Recipe/Update/3
         [HttpPost]
         public ActionResult Update(int id, Recipe recipe)
         {
@@ -159,7 +198,12 @@ namespace FitFeastExplore.Controllers
             }
         }
 
-        // GET: Recipe/Delete/5
+        /// <summary>
+        /// Displays a confirmation view for deleting a recipe.
+        /// </summary>
+        /// <param name="id">The ID of the recipe to delete.</param>
+        /// <returns>A view displaying the details of the RecipeDto object to be deleted.</returns>
+        // GET: Recipe/Delete/2
         public ActionResult Deleteconfirm(int id)
         {
             string url = "recipedata/findrecipe/" + id;
@@ -171,7 +215,12 @@ namespace FitFeastExplore.Controllers
             return View(selectedrecipe);
         }
 
-        // POST: Recipe/Delete/5
+        /// <summary>
+        /// Handles the deletion of a recipe.
+        /// </summary>
+        /// <param name="id">The ID of the recipe to delete.</param>
+        /// <returns>A redirect to the List action if successful, otherwise an Error view.</returns>
+        // POST: Recipe/Delete/2
         [HttpPost]
         public ActionResult Delete(int id)
         {
