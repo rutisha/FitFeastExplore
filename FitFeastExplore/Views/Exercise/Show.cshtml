@@ -1,4 +1,4 @@
-﻿﻿@model FitFeastExplore.Models.ExerciseWorkOutViewModel
+﻿@model FitFeastExplore.Models.ExerciseWorkOutViewModel
 
 <!DOCTYPE html>
 <html>
@@ -14,12 +14,25 @@
         <p>Sets: @Model.Exercise.sets</p>
         <p>Body Part: @Model.Exercise.BodyPart</p>
 
+        @if (!string.IsNullOrEmpty(Model.Exercise.YouTubeUrl))
+        {
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/@Model.Exercise.YouTubeUrl" frameborder="0" allowfullscreen></iframe>
+            </div>
+        }
+
+        <div>
+            <a href="@Url.Action("Edit", "Exercise", new { id = Model.Exercise.ExerciseId })" class="btn btn-warning">Edit</a>
+            <a href="@Url.Action("Delete", "Exercise", new { id = Model.Exercise.ExerciseId })" class="btn btn-danger">Delete</a>
+        </div>
+
         <form action="/Exercise/AddToWorkoutPlan" method="post">
             <input type="hidden" name="Exercise.ExerciseId" value="@Model.Exercise.ExerciseId" />
             <input type="hidden" name="Exercise.ExerciseName" value="@Model.Exercise.ExerciseName" />
             <input type="hidden" name="Exercise.Reps" value="@Model.Exercise.Reps" />
             <input type="hidden" name="Exercise.sets" value="@Model.Exercise.sets" />
             <input type="hidden" name="Exercise.BodyPart" value="@Model.Exercise.BodyPart" />
+            <input type="hidden" name="Exercise.YouTubeUrl" value="@Model.Exercise.YouTubeUrl" />
 
             <label for="WorkOutId">Select Workout:</label>
             <select name="WorkOutId" id="WorkOutId" required>
@@ -32,9 +45,7 @@
                 <button type="submit" class="btn btn-primary btn-md"> Add Exercise &raquo;</button>
             </div>
         </form>
-       </div>
-
-    
+    </div>
 </body>
 </html>
 
@@ -48,6 +59,11 @@
     }
 
     .btn {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .video-container {
         margin-top: 20px;
         margin-bottom: 20px;
     }

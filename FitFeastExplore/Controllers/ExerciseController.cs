@@ -94,6 +94,7 @@ namespace FitFeastExplore.Controllers
                 Reps = model.Exercise.Reps,
                 sets = model.Exercise.sets,
                 BodyPart = model.Exercise.BodyPart,
+                YouTubeUrl = model.Exercise.YouTubeUrl,
                 WorkOutId = model.WorkOutId
             };
 
@@ -104,6 +105,134 @@ namespace FitFeastExplore.Controllers
             }
 
             return RedirectToAction("List", "Exercise");
+        }
+
+
+        /// <summary>
+        /// Displays a form to create a new exercise.
+        /// </summary>
+        /// <returns>A view with a form to create a new exercise.</returns>
+        /// <example>
+        /// GET: Exercise/Create
+        /// </example>
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Creates a new exercise.
+        /// </summary>
+        /// <param name="exerciseDto">The ExerciseDto object containing the details of the exercise to be created.</param>
+        /// <returns>Redirects to the exercise list if successful, otherwise returns the create view.</returns>
+        /// <example>
+        /// POST: Exercise/Create
+        /// </example>
+        [HttpPost]
+        public ActionResult Create(ExerciseDto exerciseDto)
+        {
+            if (ModelState.IsValid)
+            {
+                HttpClient client = new HttpClient();
+                string url = "https://localhost:44306/api/exercisedata/addexercise";
+
+                HttpResponseMessage response = client.PostAsJsonAsync(url, exerciseDto).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("List");
+                }
+            }
+
+            return View(exerciseDto);
+        }
+
+        /// <summary>
+        /// Displays a form to edit an existing exercise.
+        /// </summary>
+        /// <param name="id">The ID of the exercise to edit.</param>
+        /// <returns>A view with a form to edit the exercise.</returns>
+        /// <example>
+        /// GET: Exercise/Edit/{id}
+        /// </example>
+        public ActionResult Edit(int id)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44306/api/exercisedata/findexercise/" + id;
+
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            ExerciseDto exerciseDto = response.Content.ReadAsAsync<ExerciseDto>().Result;
+
+            return View(exerciseDto);
+        }
+
+        /// <summary>
+        /// Updates an existing exercise.
+        /// </summary>
+        /// <param name="exerciseDto">The ExerciseDto object containing the updated details of the exercise.</param>
+        /// <returns>Redirects to the exercise list if successful, otherwise returns the edit view.</returns>
+        /// <example>
+        /// POST: Exercise/Edit/{id}
+        /// </example>
+        [HttpPost]
+        public ActionResult Edit(ExerciseDto exerciseDto)
+        {
+            if (ModelState.IsValid)
+            {
+                HttpClient client = new HttpClient();
+                string url = "https://localhost:44306/api/exercisedata/updateexercise/" + exerciseDto.ExerciseId;
+
+                HttpResponseMessage response = client.PutAsJsonAsync(url, exerciseDto).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("List");
+                }
+            }
+
+            return View(exerciseDto);
+        }
+
+        /// <summary>
+        /// Displays a confirmation page to delete an exercise.
+        /// </summary>
+        /// <param name="id">The ID of the exercise to delete.</param>
+        /// <returns>A view to confirm the deletion of the exercise.</returns>
+        /// <example>
+        /// GET: Exercise/Delete/{id}
+        /// </example>
+        public ActionResult Delete(int id)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44306/api/exercisedata/findexercise/" + id;
+
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            ExerciseDto exerciseDto = response.Content.ReadAsAsync<ExerciseDto>().Result;
+
+            return View(exerciseDto);
+        }
+
+        /// <summary>
+        /// Deletes an exercise from the database.
+        /// </summary>
+        /// <param name="id">The ID of the exercise to delete.</param>
+        /// <returns>Redirects to the exercise list after successful deletion.</returns>
+        /// <example>
+        /// POST: Exercise/Delete/{id}
+        /// </example>
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44306/api/exercisedata/deleteexercise/" + id;
+
+            HttpResponseMessage response = client.DeleteAsync(url).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+
+            return View();
         }
     }
  }

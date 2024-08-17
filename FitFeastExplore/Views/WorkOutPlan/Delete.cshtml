@@ -19,11 +19,13 @@
                 <dd>@Model.sets</dd>
                 <dt>Body Part</dt>
                 <dd>@Model.BodyPart</dd>
+                <dt>Tutorial</dt>
+                <dd>@Model.YouTubeUrl</dd>
                 <dt>Notes</dt>
                 <dd>@Model.Notes</dd>
             </dl>
 
-            <form action="/WorkOutPlan/Delete" method="post">
+            <form action="/WorkOutPlan/Delete/@Model.WorkOutPlanID" method="post">
                 <input type="hidden" name="WorkOutPlanID" value="@Model.WorkOutPlanID" />
                 <button class="btn btn-primary btn-md" type="submit" value="Delete">Delete &raquo;</button>
             </form>
