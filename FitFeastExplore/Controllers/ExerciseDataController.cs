@@ -42,8 +42,9 @@ namespace FitFeastExplore.Controllers
                     ExerciseName = Exercise.ExerciseName,
                     Reps = Exercise.Reps,
                     sets = Exercise.sets,
-                    BodyPart = Exercise.BodyPart
-                };
+                    BodyPart = Exercise.BodyPart,
+                    YouTubeUrl = Exercise.YouTubeUrl
+            };
 
                 ExerciseDtos.Add(ExerciseDto);
             }
@@ -70,10 +71,10 @@ namespace FitFeastExplore.Controllers
         [Route("api/ExerciseData/SearchExercises")]
         public List<ExerciseDto> SearchExercises(string searchString)
         {
-            var query = $"SELECT * FROM Exercises WHERE ExerciseName LIKE '%{searchString}%'";
-            var exercises = db.Exercises.SqlQuery(query).ToList();
+            // Use LINQ to filter exercises based on the search string
+            var exercises = db.Exercises.Where(e => e.ExerciseName.ToLower().Contains(searchString.ToLower())).ToList();
 
-            List<ExerciseDto> ExerciseDtos = new List<ExerciseDto>();
+            List<ExerciseDto> exerciseDtos = new List<ExerciseDto>();
 
             foreach (Exercise exercise in exercises)
             {
@@ -83,13 +84,14 @@ namespace FitFeastExplore.Controllers
                     ExerciseName = exercise.ExerciseName,
                     Reps = exercise.Reps,
                     sets = exercise.sets,
-                    BodyPart = exercise.BodyPart
+                    BodyPart = exercise.BodyPart,
+                    YouTubeUrl = exercise.YouTubeUrl
                 };
 
-                ExerciseDtos.Add(exerciseDto);
+                exerciseDtos.Add(exerciseDto);
             }
 
-            return ExerciseDtos;
+            return exerciseDtos;
         }
 
 
@@ -120,10 +122,102 @@ namespace FitFeastExplore.Controllers
                 ExerciseName = Exercise.ExerciseName,
                 Reps = Exercise.Reps,
                 sets = Exercise.sets,
-                BodyPart = Exercise.BodyPart
+                BodyPart = Exercise.BodyPart,
+                YouTubeUrl = Exercise.YouTubeUrl
             };
 
             return ExerciseDto;
+        }
+
+        /// <summary>
+        /// Adds a new exercise to the database.
+        /// </summary>
+        /// <param name="exerciseDto">The ExerciseDto object containing the details of the exercise to be added.</param>
+        /// <returns>An IHttpActionResult indicating the result of the operation.</returns>
+        /// <example>
+        /// POST: api/ExerciseData/AddExercise
+        /// </example>
+        [HttpPost]
+        [Route("api/ExerciseData/AddExercise")]
+        public IHttpActionResult AddExercise(ExerciseDto exerciseDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Exercise exercise = new Exercise
+            {
+                ExerciseName = exerciseDto.ExerciseName,
+                Reps = exerciseDto.Reps,
+                sets = exerciseDto.sets,
+                BodyPart = exerciseDto.BodyPart,
+                YouTubeUrl = exerciseDto.YouTubeUrl
+            };
+
+            db.Exercises.Add(exercise);
+            db.SaveChanges();
+
+            return Ok(exerciseDto);
+        }
+
+        /// <summary>
+        /// Updates an existing exercise in the database.
+        /// </summary>
+        /// <param name="id">The ID of the exercise to be updated.</param>
+        /// <param name="exerciseDto">The ExerciseDto object containing the updated details of the exercise.</param>
+        /// <returns>An IHttpActionResult indicating the result of the operation.</returns>
+        /// <example>
+        /// PUT: api/ExerciseData/UpdateExercise/{id}
+        /// </example>
+        [HttpPut]
+        [Route("api/ExerciseData/UpdateExercise/{id}")]
+        public IHttpActionResult UpdateExercise(int id, ExerciseDto exerciseDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var exercise = db.Exercises.Find(id);
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+
+            exercise.ExerciseName = exerciseDto.ExerciseName;
+            exercise.Reps = exerciseDto.Reps;
+            exercise.sets = exerciseDto.sets;
+            exercise.BodyPart = exerciseDto.BodyPart;
+            exercise.YouTubeUrl = exerciseDto.YouTubeUrl;
+
+            db.SaveChanges();
+
+            return Ok(exerciseDto);
+        }
+
+        /// <summary>
+        /// Deletes an exercise from the database.
+        /// </summary>
+        /// <param name="id">The ID of the exercise to be deleted.</param>
+        /// <returns>An IHttpActionResult indicating the result of the operation.</returns>
+        /// <example>
+        /// DELETE: api/ExerciseData/DeleteExercise/{id}
+        /// </example>
+        [HttpDelete]
+        [Route("api/ExerciseData/DeleteExercise/{id}")]
+        public IHttpActionResult DeleteExercise(int id)
+        {
+            var exercise = db.Exercises.Find(id);
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+
+            db.Exercises.Remove(exercise);
+            db.SaveChanges();
+
+            return Ok();
         }
     }
 }

@@ -1,80 +1,52 @@
-﻿﻿@model FitFeastExplore.Models.WorkOutPlan
+﻿@model FitFeastExplore.Models.WorkOutPlanDto
 
 @{
-    ViewBag.Title = "Create WorkOutPlan";
+    ViewBag.Title = "Create Workout Plan";
 }
 
-<h2>Create WorkOutPlan</h2>
+<h2>Create Workout Plan</h2>
 
-<form action="/WorkOutPlan/Create" method="post" class="form-horizontal">
-    <input type="hidden" name="WorkOutId" value="@Model.WorkOutId" />
-
-    <div id="maindiv">
-        <div id="nameFlex">
-            <label for="ExerciseName">Search for Exercise:</label>
-            <div>
-                <input type="text" id="searchString" name="searchString" class="" />
-                <button type="submit" value="Search" class="btn">Search</button>
-            </div>
-        </div>
-
-        <div>
-            <h3>Exercises List</h3>
-            @if (ViewBag.Exercises != null)
-            {
-                <ul>
-                    @foreach (var exercise in ViewBag.Exercises)
-                    {
-                        <li>
-                            <a href="@Url.Action("Show", "Exercise", new { id = exercise.ExerciseId })">@exercise.ExerciseName</a>
-                        </li>
-                    }
-                </ul>
-            }
+@using (Html.BeginForm("Create", "WorkOutPlan", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExerciseName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.ExerciseName, new { @class = "form-control" })
         </div>
     </div>
-</form>
-
-<style>
-    body {
-        text-align: center;
-        font-size: 18px;
-        color: black;
-    }
-
-    #maindiv {
-        margin-top: 50px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    input {
-        margin-top: 10px;
-        font-size: 18px;
-        color: black;
-        border: 1px solid black;
-        border-radius: 5px;
-    }
-
-    .btn {
-        margin-top: 10px;
-        padding-left: 30px;
-        padding-right: 30px;
-        font-size: 18px;
-        text-align: center;
-        text-decoration: none;
-        color: black;
-        border: 1px solid black;
-        border-radius: 5px;
-        cursor: pointer;
-        background-color: #FFE433;
-    }
-
-        .btn:hover {
-            background-color: #ffef83;
-            border: 1px solid black;
-            border-radius: 5px;
-            color: black;
-        }
-</style>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Reps, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Reps, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sets, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.sets, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BodyPart, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.BodyPart, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.YouTubeUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.YouTubeUrl, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Notes, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+}

@@ -16,6 +16,7 @@ namespace FitFeastExplore.Models
         public int sets { get; set; }
         public string BodyPart { get; set; }
         public string Notes { get; set; }
+        public string YouTubeUrl { get; set; }
 
         [ForeignKey("Exercise")]
         public int ExerciseId { get; set; }
@@ -34,5 +35,6 @@ namespace FitFeastExplore.Models
         public int sets { get; set; }
         public string BodyPart { get; set; }
         public string Notes { get; set; }
+        public string YouTubeUrl { get; set; }
     }
 }

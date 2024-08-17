@@ -96,7 +96,8 @@ namespace FitFeastExplore.Controllers
                         ExerciseName = e.ExerciseName,
                         Reps = e.Reps,
                         sets = e.sets,
-                        BodyPart = e.BodyPart
+                        BodyPart = e.BodyPart,
+                        YouTubeUrl = e.YouTubeUrl
                     }).ToList()
                 };
 

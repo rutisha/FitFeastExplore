@@ -24,6 +24,7 @@ namespace FitFeastExplore.Controllers
             return View(workoutPlans);
         }
 
+
         /// <summary>
         /// Displays a form for editing a specific workout plan.
         /// </summary>
@@ -47,10 +48,56 @@ namespace FitFeastExplore.Controllers
                 Reps = workoutPlan.Reps,
                 sets = workoutPlan.sets,
                 BodyPart = workoutPlan.BodyPart,
+                YouTubeUrl = workoutPlan.YouTubeUrl,
                 Notes = workoutPlan.Notes
             };
 
             return View(viewModel);
+        }
+
+        /// <summary>
+        /// Displays a form for creating a new workout plan.
+        /// </summary>
+        /// <returns>A view with a form for creating a new workout plan.</returns>
+        /// <example>
+        /// GET: WorkOutPlan/Create
+        /// </example>
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Creates a new workout plan.
+        /// </summary>
+        /// <param name="workOutPlanDto">The workout plan data transfer object containing workout plan details.</param>
+        /// <returns>Redirects to the workout details if successful, otherwise returns the create view with validation errors.</returns>
+        /// <example>
+        /// POST: WorkOutPlan/Create
+        /// </example>
+        [HttpPost]
+        public ActionResult Create(WorkOutPlanDto workOutPlanDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var workoutPlan = new WorkOutPlan
+                {
+                    ExerciseName = workOutPlanDto.ExerciseName,
+                    Reps = workOutPlanDto.Reps,
+                    sets = workOutPlanDto.sets,
+                    BodyPart = workOutPlanDto.BodyPart,
+                    YouTubeUrl = workOutPlanDto.YouTubeUrl,
+                    Notes = workOutPlanDto.Notes,
+                    WorkOutId = workOutPlanDto.WorkOutPlanID
+                };
+
+                db.WorkOutPlans.Add(workoutPlan);
+                db.SaveChanges();
+
+                return RedirectToAction("Details", "WorkOut", new { id = workoutPlan.WorkOutId });
+            }
+
+            return View(workOutPlanDto);
         }
 
         /// <summary>
@@ -76,6 +123,7 @@ namespace FitFeastExplore.Controllers
                 workoutPlan.Reps = workOutPlanDto.Reps;
                 workoutPlan.sets = workOutPlanDto.sets;
                 workoutPlan.BodyPart = workOutPlanDto.BodyPart;
+                workoutPlan.YouTubeUrl = workOutPlanDto.YouTubeUrl;
                 workoutPlan.Notes = workOutPlanDto.Notes;
 
                 db.SaveChanges();
@@ -109,6 +157,7 @@ namespace FitFeastExplore.Controllers
                 Reps = workoutPlan.Reps,
                 sets = workoutPlan.sets,
                 BodyPart = workoutPlan.BodyPart,
+                YouTubeUrl = workoutPlan.YouTubeUrl,
                 Notes = workoutPlan.Notes
             };
 
@@ -126,16 +175,19 @@ namespace FitFeastExplore.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            var workoutPlan = db.WorkOutPlans.Find(id);
-            if (workoutPlan == null)
+            using (var db = new ApplicationDbContext())
             {
-                return HttpNotFound();
+                var workoutPlan = db.WorkOutPlans.Find(id);
+                if (workoutPlan == null)
+                {
+                    return HttpNotFound();
+                }
+
+                db.WorkOutPlans.Remove(workoutPlan);
+                db.SaveChanges();
+
+                return RedirectToAction("Details", "WorkOut", new { id = workoutPlan.WorkOutId });
             }
-
-            db.WorkOutPlans.Remove(workoutPlan);
-            db.SaveChanges();
-
-            return RedirectToAction("Details", "WorkOut", new { id = workoutPlan.WorkOutId });
         }
     }
 }
