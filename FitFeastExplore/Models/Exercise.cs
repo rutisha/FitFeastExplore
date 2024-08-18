@@ -14,6 +14,7 @@ namespace FitFeastExplore.Models
         public int Reps { get; set; }
         public int sets { get; set; }
         public string BodyPart { get; set; }
+        public string YouTubeUrl { get; set; }
     }
 
     public class ExerciseDto
@@ -23,5 +24,6 @@ namespace FitFeastExplore.Models
         public int Reps { get; set; }
         public int sets { get; set; }
         public string BodyPart { get; set; }
+        public string YouTubeUrl { get; set; }
     }
 }

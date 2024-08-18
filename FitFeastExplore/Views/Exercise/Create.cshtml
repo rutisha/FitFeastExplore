@@ -1,0 +1,32 @@
+﻿@model FitFeastExplore.Models.ExerciseDto
+
+@{
+    ViewBag.Title = "Create Exercise";
+}
+
+<h2>Create Exercise</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExerciseName)
+        @Html.TextBoxFor(model => model.ExerciseName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Reps)
+        @Html.TextBoxFor(model => model.Reps, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sets)
+        @Html.TextBoxFor(model => model.sets, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BodyPart)
+        @Html.TextBoxFor(model => model.BodyPart, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.YouTubeUrl)
+        @Html.TextBoxFor(model => model.YouTubeUrl, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+}

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<FitFeastExplore.Models.ExerciseDto>
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Exercise List";
 }
 
 <div class="container mt-5">
@@ -13,16 +13,17 @@
                     <button class="btn btn-primary" type="submit">Search</button>
                 </div>
             </form>
-            @foreach (var Item in Model)
+            <div class="mb-3">
+                <a href="@Url.Action("Create", "Exercise")" class="btn btn-success">Create New Exercise</a>
+            </div>
+            @foreach (var item in Model)
             {
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h3 class="card-title"><a href="Show/@Item.ExerciseId">@Item.ExerciseName</a></h3>
+                        <h3 class="card-title"><a href="@Url.Action("Show", "Exercise", new { id = item.ExerciseId })">@item.ExerciseName</a></h3>
                     </div>
                 </div>
             }
         </div>
     </div>
 </div>
-
-
