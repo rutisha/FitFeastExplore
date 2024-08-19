@@ -11,15 +11,33 @@
             <div class="card">
                 <div class="card-header bg-info text-white">
                     <h2 class="card-title"><span class="fw-bold">Recipe Id: #@Model.RecipeId</span></h2>
+                    <a href="/Ingredient/New?recipeId=@Model.RecipeId" class="btn btn-success">Add New Ingredient</a>
                 </div>
                 <div class="card-body">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img src="@Url.Content(Model.ImagePath)" alt="@Model.RecipeName" class="img-fluid mb-3" />
+                    }
                     <p class="card-text"><span class="fw-bold">Recipe Name:</span> @Model.RecipeName</p>
                     <p class="card-text"><span class="fw-bold">Category:</span> @Model.Category</p>
                     <p class="card-text"><span class="fw-bold">Instructions:</span> @Model.Instructions</p>
                     <p class="card-text"><span class="fw-bold">Protein:</span> @Model.Protein</p>
                     <p class="card-text"><span class="fw-bold">Calories:</span> @Model.Calories</p>
                     <p class="card-text"><span class="fw-bold">Cooking Time:</span> @Model.CookingTime</p>
-                    <p class="card-text"><span class="fw-bold">Ingredient:</span> @Model.IngredientName</p>
+                    <h3><strong>Ingredients: </strong></h3>
+                    @if (Model.Ingredients != null && Model.Ingredients.Any())
+                    {
+                        foreach (var ingredient in Model.Ingredients)
+                        {
+                            <div>
+                                <p><strong>[Ingredient: @ingredient.IngredientName]: @ingredient.Quantity </strong></p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No ingredients available.</p>
+                    }
 
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-end">

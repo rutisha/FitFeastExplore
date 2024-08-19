@@ -37,7 +37,11 @@
                 </div>
                 <div class="form-group">
                     <label for="IngredientId">Ingredient Id:</label>
-                    <input type="number" class="form-control" id="IngredientId" name="IngredientId" value="@Model.IngredientId" />
+                    <input type="number" class="form-control" id="IngredientId" name="IngredientId" value="@Model.Ingredients" />
+                </div>
+                <div class="form-group">
+                    <label for="ImageFile" class="form-label">Recipe Image Path:</label>
+                    <input type="text" class="form-control" id="ImagePath" name="ImagePath" value="@Model.ImagePath"/>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-success" value="Update Recipe" />

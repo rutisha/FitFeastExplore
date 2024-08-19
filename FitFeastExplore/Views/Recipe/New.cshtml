@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "New";
 }
 
@@ -22,7 +21,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="Instructions" class="form-label">Instructions:</label>
-                            <input type="text" class="form-control" id="Instructions" name="Instructions" />
+                            <textarea class="form-control" id="Instructions" name="Instructions" rows="3"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="Protein" class="form-label">Protein:</label>
@@ -37,8 +36,17 @@
                             <input type="text" class="form-control" id="CookingTime" name="CookingTime" />
                         </div>
                         <div class="mb-3">
-                            <label for="IngredientId" class="form-label">Ingredient Id:</label>
-                            <input type="number" class="form-control" id="IngredientId" name="IngredientId" />
+                            <label for="IngredientId" class="form-label">Select Ingredient:</label>
+                            <select class="form-control" id="IngredientId" name="IngredientId">
+                                @foreach (var item in ViewBag.Ingredients as SelectList)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ImageFile" class="form-label">Recipe Image:</label>
+                            <input type="text" class="form-control" id="ImagePath" name="ImagePath" />
                         </div>
                         <button type="submit" class="btn btn-primary">Add Recipe</button>
                     </form>

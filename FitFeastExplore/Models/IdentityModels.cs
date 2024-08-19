@@ -33,7 +33,22 @@ namespace FitFeastExplore.Models
         public DbSet<WorkOutPlan> WorkOutPlans { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
-        
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder); // Ensure this is called first
+
+            // Configuring the many-to-many relationship between Recipe and Ingredient
+            modelBuilder.Entity<Recipe>()
+                        .HasMany(r => r.Ingredients)
+                        .WithMany(i => i.Recipes)
+                        .Map(m =>
+                        {
+                            m.ToTable("RecipeIngredients");
+                            m.MapLeftKey("RecipeId");
+                            m.MapRightKey("IngredientId");
+                        });
+        }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

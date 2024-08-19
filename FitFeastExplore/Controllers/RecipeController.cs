@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -78,6 +79,8 @@ namespace FitFeastExplore.Controllers
 
             RecipeDto Recipe = response.Content.ReadAsAsync<RecipeDto>().Result;
 
+            //Debug.WriteLine("Ingredients count: " + Recipe.Ingredients.Count);
+
             return View(Recipe);
         }
 
@@ -86,8 +89,17 @@ namespace FitFeastExplore.Controllers
         /// </summary>
         /// <returns>A view displaying the form to create a new recipe.</returns>
         // GET: Recipe/New
+        [Authorize]
         public ActionResult New()
         {
+            string url = "ingredientdata/listingredients";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            IEnumerable<IngredientDto> ingredients = response.Content.ReadAsAsync<IEnumerable<IngredientDto>>().Result;
+
+            // Pass ingredients to the view
+            ViewBag.Ingredients = new SelectList(ingredients, "IngredientId", "IngredientName");
+
             return View();
         }
 
@@ -98,8 +110,16 @@ namespace FitFeastExplore.Controllers
         /// <returns>A redirect to the List action if successful, otherwise an Error view.</returns>
         // POST: Recipe/Create
         [HttpPost]
-        public ActionResult Create(Recipe recipe)
+        [Authorize]
+        public ActionResult Create(Recipe recipe, HttpPostedFileBase ImageFile)
         {
+            if (ImageFile != null && ImageFile.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(ImageFile.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Recipes"), fileName);
+                ImageFile.SaveAs(path);
+                recipe.ImagePath = "/Images/Recipes/" + fileName;
+            }
             Debug.WriteLine("the json payload is :");
 
             string url = "recipedata/addrecipe";
@@ -139,6 +159,7 @@ namespace FitFeastExplore.Controllers
         /// <param name="id">The ID of the recipe to edit.</param>
         /// <returns>A view displaying the form to edit the specified RecipeDto object.</returns>
         // GET: Recipe/Edit/3
+        [Authorize]
         public ActionResult Edit(int id)
         {
             string url = "recipedata/findrecipe/" + id;
@@ -160,6 +181,7 @@ namespace FitFeastExplore.Controllers
         /// <returns>A redirect to the Show action if successful, otherwise the Edit view.</returns>
         // POST: Recipe/Update/3
         [HttpPost]
+        [Authorize]
         public ActionResult Update(int id, Recipe recipe)
         {
             try
@@ -171,7 +193,7 @@ namespace FitFeastExplore.Controllers
                 Debug.WriteLine(recipe.Protein);
                 Debug.WriteLine(recipe.Calories);
                 Debug.WriteLine(recipe.CookingTime);
-                Debug.WriteLine(recipe.IngredientId);
+                //Debug.WriteLine(recipe.IngredientId);
 
 
 
@@ -204,6 +226,7 @@ namespace FitFeastExplore.Controllers
         /// <param name="id">The ID of the recipe to delete.</param>
         /// <returns>A view displaying the details of the RecipeDto object to be deleted.</returns>
         // GET: Recipe/Delete/2
+        [Authorize]
         public ActionResult Deleteconfirm(int id)
         {
             string url = "recipedata/findrecipe/" + id;
@@ -222,6 +245,7 @@ namespace FitFeastExplore.Controllers
         /// <returns>A redirect to the List action if successful, otherwise an Error view.</returns>
         // POST: Recipe/Delete/2
         [HttpPost]
+        [Authorize]
         public ActionResult Delete(int id)
         {
             string url = "deleterecipe/" + id;

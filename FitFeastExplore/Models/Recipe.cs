@@ -16,9 +16,17 @@ namespace FitFeastExplore.Models
         public string Calories { get; set; }
         public string CookingTime { get; set; }
 
-        [ForeignKey("Ingredient")]
-        public int IngredientId { get; set; }
-        public virtual Ingredient Ingredient { get; set; }
+        //[ForeignKey("Ingredient")]
+        //public int IngredientId { get; set; }
+        //public virtual Ingredient Ingredient { get; set; }
+        public virtual ICollection<Ingredient> Ingredients { get; set; }
+
+
+        // New properties for image
+        public string ImagePath { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 
     public class RecipeDto
@@ -30,9 +38,12 @@ namespace FitFeastExplore.Models
         public string Protein { get; set; }
         public string Calories { get; set; }
         public string CookingTime { get; set; }
-        public int IngredientId { get; set; }
-        public string IngredientName { get; set; }
-        public string Quantity { get; set; }
+        public List<IngredientDto> Ingredients { get; set; }
+
+        //public int IngredientId { get; set; }
+        //public string IngredientName { get; set; }
+        //public string Quantity { get; set; }
+        public string ImagePath { get; set; }
 
     }
 }
