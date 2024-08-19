@@ -94,7 +94,7 @@ namespace FitFeastExplore.Controllers
 
         // POST: Tour/Create
         [HttpPost]
-
+        [Authorize]
         public ActionResult Create(Tour Tour)
         {
             Debug.WriteLine("the json payload is :");
@@ -131,12 +131,15 @@ namespace FitFeastExplore.Controllers
         {
             return View();
         }
+
+        [Authorize]
         public ActionResult New()
         {
             return View();
         }
 
         // GET: Tour/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             string url = "tourdata/findtour/" + id;
@@ -152,6 +155,7 @@ namespace FitFeastExplore.Controllers
 
         // POST: Tour/Update/5
         [HttpPost]
+        [Authorize]
         public ActionResult Update(int id, Tour tour)
         {
             try
@@ -187,6 +191,7 @@ namespace FitFeastExplore.Controllers
         }
 
         // GET: Tour/Delete/5
+        [Authorize]
         public ActionResult Deleteconfirm(int id)
         {
             string url = "tourdata/findtour/" + id;
@@ -200,6 +205,7 @@ namespace FitFeastExplore.Controllers
 
         // POST: Customer/Delete/5
         [HttpPost]
+        [Authorize]
         public ActionResult Delete(int id)
         {
             string url = "tourdata/deletetour/" + id;
