@@ -223,6 +223,7 @@
     <Compile Include="Migrations\202408170156564_AddYouTubeUrlToWorkOutPlan.designer.cs">
       <DependentUpon>202408170156564_AddYouTubeUrlToWorkOutPlan.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\202408180635072_images.cs" />
     <Compile Include="Migrations\202408180635072_images.Designer.cs">
       <DependentUpon>202408180635072_images.cs</DependentUpon>
@@ -231,6 +232,8 @@
     <Compile Include="Migrations\202408190812511_UpdateRecipeIngredientRelationship.Designer.cs">
       <DependentUpon>202408190812511_UpdateRecipeIngredientRelationship.cs</DependentUpon>
     </Compile>
+=======
+>>>>>>> 6ce7d29866b8c98818d334032df3c4fc2bf0bff5
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -418,12 +421,15 @@
     <EmbeddedResource Include="Migrations\202408170156564_AddYouTubeUrlToWorkOutPlan.resx">
       <DependentUpon>202408170156564_AddYouTubeUrlToWorkOutPlan.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\202408180635072_images.resx">
       <DependentUpon>202408180635072_images.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202408190812511_UpdateRecipeIngredientRelationship.resx">
       <DependentUpon>202408190812511_UpdateRecipeIngredientRelationship.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> 6ce7d29866b8c98818d334032df3c4fc2bf0bff5
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
