@@ -35,6 +35,7 @@ namespace FitFeastExplore.Controllers
         /// <example>
         /// GET: WorkOut/Create
         /// </example>
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -49,6 +50,7 @@ namespace FitFeastExplore.Controllers
         /// POST: WorkOut/Create
         /// </example>
         [HttpPost]
+        [Authorize]
         public ActionResult Create(WorkOutDto workOutDto)
         {
             HttpClient client = new HttpClient();
@@ -113,6 +115,7 @@ namespace FitFeastExplore.Controllers
         /// <example>
         /// GET: WorkOut/Edit/{id}
         /// </example>
+        [Authorize]
         public ActionResult Edit(int id)
         {
             using (var db = new ApplicationDbContext())
@@ -142,6 +145,7 @@ namespace FitFeastExplore.Controllers
         /// POST: WorkOut/Edit/{id}
         /// </example>
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(WorkOutDto workOutDto)
         {
             if (ModelState.IsValid)
@@ -172,6 +176,7 @@ namespace FitFeastExplore.Controllers
         /// <example>
         /// GET: WorkOut/Delete/{id}
         /// </example>
+        [Authorize]
         public ActionResult Delete(int id)
         {
             using (var db = new ApplicationDbContext())
@@ -201,6 +206,7 @@ namespace FitFeastExplore.Controllers
         /// POST: WorkOut/Delete/{id}
         /// </example>
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             using (var db = new ApplicationDbContext())
