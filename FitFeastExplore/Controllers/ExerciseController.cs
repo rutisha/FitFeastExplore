@@ -85,6 +85,7 @@ namespace FitFeastExplore.Controllers
         /// POST: Exercise/AddToWorkoutPlan
         /// </example>
         [HttpPost]
+        [Authorize]
         public ActionResult AddToWorkoutPlan(ExerciseWorkOutViewModel model)
         {
             WorkOutPlan workoutPlan = new WorkOutPlan
@@ -115,6 +116,7 @@ namespace FitFeastExplore.Controllers
         /// <example>
         /// GET: Exercise/Create
         /// </example>
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -129,6 +131,7 @@ namespace FitFeastExplore.Controllers
         /// POST: Exercise/Create
         /// </example>
         [HttpPost]
+        [Authorize]
         public ActionResult Create(ExerciseDto exerciseDto)
         {
             if (ModelState.IsValid)
@@ -154,6 +157,7 @@ namespace FitFeastExplore.Controllers
         /// <example>
         /// GET: Exercise/Edit/{id}
         /// </example>
+        [Authorize]
         public ActionResult Edit(int id)
         {
             HttpClient client = new HttpClient();
@@ -175,6 +179,7 @@ namespace FitFeastExplore.Controllers
         /// POST: Exercise/Edit/{id}
         /// </example>
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(ExerciseDto exerciseDto)
         {
             if (ModelState.IsValid)
@@ -200,6 +205,7 @@ namespace FitFeastExplore.Controllers
         /// <example>
         /// GET: Exercise/Delete/{id}
         /// </example>
+        [Authorize]
         public ActionResult Delete(int id)
         {
             HttpClient client = new HttpClient();
@@ -221,6 +227,7 @@ namespace FitFeastExplore.Controllers
         /// POST: Exercise/Delete/{id}
         /// </example>
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             HttpClient client = new HttpClient();
