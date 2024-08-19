@@ -54,6 +54,7 @@ namespace FitFeastExplore.Controllers
         }
 
         // POST: Booking/Create
+        [Authorize]
         [HttpPost]
         public ActionResult Create(Booking booking)
         {
@@ -86,6 +87,7 @@ namespace FitFeastExplore.Controllers
         {
             return View();
         }
+        [Authorize]
         public ActionResult New()
         {
 
@@ -105,8 +107,9 @@ namespace FitFeastExplore.Controllers
 
             return View(CreateBookingViewModel);
         }
-
+            
         // GET: Booking/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             string url = "bookingdata/findbooking/" + id;
@@ -121,6 +124,7 @@ namespace FitFeastExplore.Controllers
         }
 
         // POST: Booking/Update/5
+        [Authorize]
         [HttpPost]
         public ActionResult Update(int id, Booking booking)
         {
@@ -157,6 +161,7 @@ namespace FitFeastExplore.Controllers
         }
 
         // GET: Booking/Delete/5
+        [Authorize]
         public ActionResult Deleteconfirm(int id)
         {
             string url = "bookingdata/findbooking/" + id;
@@ -169,6 +174,7 @@ namespace FitFeastExplore.Controllers
         }
 
         // POST: Booking/Delete/5
+        [Authorize]
         [HttpPost]
         public ActionResult Delete(int id)
         {
