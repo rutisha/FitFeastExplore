@@ -26,7 +26,7 @@ namespace FitFeastExplore.Controllers
             client.BaseAddress = new Uri("https://localhost:44306/api/");
         }
         // GET: Tour/List
-        public ActionResult List(string searchString)
+        /* public ActionResult List(string searchString)
         {
 
             string url = "tourdata/listtours";
@@ -41,6 +41,32 @@ namespace FitFeastExplore.Controllers
             IEnumerable<TourDto> TourDtos = response.Content.ReadAsAsync<IEnumerable<TourDto>>().Result;
 
             return View(TourDtos);
+        } */
+        public ActionResult List(string searchString)
+        {
+            string url = "tourData/listtours";
+
+            // Building the query parameters based on user inputs
+            var queryParams = new List<string>();
+            if (!string.IsNullOrEmpty(searchString))
+                queryParams.Add($"searchString={Uri.EscapeDataString(searchString)}");
+
+            if (queryParams.Any())
+                url += "?" + string.Join("&", queryParams);
+
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                IEnumerable<TourDto> TourDtos = response.Content.ReadAsAsync<IEnumerable<TourDto>>().Result;
+                return View(TourDtos);
+            }
+            else
+            {
+                // Handle error (e.g., display an error message)
+                ModelState.AddModelError("", "Unable to load tours. Please try again later.");
+                return View(new List<TourDto>());
+            }
         }
 
         //GET: Tour/Show/3

@@ -31,7 +31,7 @@ namespace FitFeastExplore.Controllers
         [Route("api/RecipeData/ListRecipes")]
         public List<RecipeDto> ListRecipes()
         {
-            List<Recipe> Recipes = db.Recipes.ToList();
+            List<Recipe> Recipes = db.Recipes.Include(r => r.Ingredients).ToList();
             List<RecipeDto> RecipeDtos = new List<RecipeDto>();
 
             Recipes.ForEach(r => RecipeDtos.Add(new RecipeDto()
@@ -43,7 +43,11 @@ namespace FitFeastExplore.Controllers
                 Protein = r.Protein,
                 Calories = r.Calories,
                 CookingTime = r.CookingTime,
-                IngredientName = r.Ingredient.IngredientName
+                Ingredients = r.Ingredients.Select(i => new IngredientDto
+                {
+                    IngredientId = i.IngredientId,
+                    IngredientName = i.IngredientName
+                }).ToList()
             }));
 
 
@@ -66,7 +70,8 @@ namespace FitFeastExplore.Controllers
         [Route("api/RecipeData/ListRecipesByCategory/{category}")]
         public List<RecipeDto> ListRecipesByCategory(string category)
         {
-            List<Recipe> Recipes = db.Recipes.Where(r => r.Category == category).ToList();
+            List<Recipe> Recipes = db.Recipes.Include(r => r.Ingredients)
+                                     .Where(r => r.Category == category).ToList();
             List<RecipeDto> RecipeDtos = new List<RecipeDto>();
 
             Recipes.ForEach(r => RecipeDtos.Add(new RecipeDto()
@@ -78,7 +83,11 @@ namespace FitFeastExplore.Controllers
                 Protein = r.Protein,
                 Calories = r.Calories,
                 CookingTime = r.CookingTime,
-                IngredientName = r.Ingredient.IngredientName
+                Ingredients = r.Ingredients.Select(i => new IngredientDto
+                {
+                    IngredientId = i.IngredientId,
+                    IngredientName = i.IngredientName
+                }).ToList()
             }));
 
             return RecipeDtos;
@@ -103,7 +112,7 @@ namespace FitFeastExplore.Controllers
         [Route("api/RecipeData/FindRecipe/{id}")]
         public IHttpActionResult FindRecipe(int id)
         {
-            Recipe Recipe = db.Recipes.Find(id);
+            Recipe Recipe = db.Recipes.Include(r => r.Ingredients).FirstOrDefault(r => r.RecipeId == id);
 
             if (Recipe == null)
             {
@@ -119,8 +128,12 @@ namespace FitFeastExplore.Controllers
                 Protein = Recipe.Protein,
                 Calories = Recipe.Calories,
                 CookingTime = Recipe.CookingTime,
-                IngredientId = Recipe.Ingredient.IngredientId,
-                IngredientName = Recipe.Ingredient.IngredientName
+                ImagePath = Recipe.ImagePath,
+                Ingredients = Recipe.Ingredients.Select(i => new IngredientDto
+                {
+                    IngredientId = i.IngredientId,
+                    IngredientName = i.IngredientName
+                }).ToList()
             };
 
             return Ok(RecipeDtos);
@@ -153,8 +166,7 @@ namespace FitFeastExplore.Controllers
 
             db.Recipes.Add(Recipe);
             db.SaveChanges();
-
-            return Ok();
+            return CreatedAtRoute("DefaultApi", new { id = Recipe.RecipeId }, Recipe);
         }
 
         /// <summary>
@@ -273,17 +285,20 @@ namespace FitFeastExplore.Controllers
         [Route("api/RecipeData/SearchRecipes")]
         public List<RecipeDto> SearchRecipes(string searchString)
         {
-            var recipes = db.Recipes
-                .Where(r => r.RecipeName.Contains(searchString))
-                .ToList();
+            var recipes = db.Recipes.Include(r => r.Ingredients)
+                            .Where(r => r.RecipeName.Contains(searchString))
+                            .ToList();
 
             return recipes.Select(r => new RecipeDto
             {
                 RecipeId = r.RecipeId,
                 RecipeName = r.RecipeName,
-                IngredientId = r.IngredientId,
                 Category = r.Category,
-                // Add more properties as needed
+                Ingredients = r.Ingredients.Select(i => new IngredientDto
+                {
+                    IngredientId = i.IngredientId,
+                    IngredientName = i.IngredientName
+                }).ToList()
             }).ToList();
         }
         private bool RecipeExists(int id)

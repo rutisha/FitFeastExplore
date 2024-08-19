@@ -12,6 +12,7 @@ namespace FitFeastExplore.Models
         public int IngredientId { get; set; }
         public string IngredientName { get; set; }
         public string Quantity { get; set; }
+        public virtual ICollection<Recipe> Recipes { get; set; }
     }
 
     public class IngredientDto

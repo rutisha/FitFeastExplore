@@ -53,8 +53,16 @@ namespace FitFeastExplore.Controllers
             return View(selectedIngredient);
         }
 
+        //Get: Ingredient/New
+        [Authorize]
+        public ActionResult New()
+        {
+            return View();
+        }
+
         // POST: Ingredient/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Ingredient ingredient)
         {
             Debug.WriteLine("the json payload is :");
@@ -89,6 +97,7 @@ namespace FitFeastExplore.Controllers
 
         // GET: Ingredient/Edit/3
         // This action retrieves the ingredient data for editing by ID
+        [Authorize]
         public ActionResult Edit(int id)
         {
             string url = "ingredientdata/findingredient/" + id;
@@ -104,6 +113,7 @@ namespace FitFeastExplore.Controllers
 
         // POST: Ingredient/Update/3
         [HttpPost]
+        [Authorize]
         public ActionResult Update(int id, Ingredient ingredient)
         {
             try
@@ -138,6 +148,7 @@ namespace FitFeastExplore.Controllers
         }
 
         // GET: Ingredient/Delete/3
+        [Authorize]
         public ActionResult Deleteconfirm(int id)
         {
             string url = "ingredientdata/findingredient/" + id;
@@ -150,6 +161,7 @@ namespace FitFeastExplore.Controllers
         }
 
         // POST: Ingredients/Delete/3
+        [Authorize]
         [HttpPost]
         public ActionResult Delete(int id)
         {

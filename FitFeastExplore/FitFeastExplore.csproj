@@ -215,6 +215,22 @@
     <Compile Include="Migrations\202408030123157_recipe.Designer.cs">
       <DependentUpon>202408030123157_recipe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202408170114126_AddYouTubeUrlToExercise.cs" />
+    <Compile Include="Migrations\202408170114126_AddYouTubeUrlToExercise.designer.cs">
+      <DependentUpon>202408170114126_AddYouTubeUrlToExercise.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408170156564_AddYouTubeUrlToWorkOutPlan.cs" />
+    <Compile Include="Migrations\202408170156564_AddYouTubeUrlToWorkOutPlan.designer.cs">
+      <DependentUpon>202408170156564_AddYouTubeUrlToWorkOutPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408180635072_images.cs" />
+    <Compile Include="Migrations\202408180635072_images.Designer.cs">
+      <DependentUpon>202408180635072_images.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408190812511_UpdateRecipeIngredientRelationship.cs" />
+    <Compile Include="Migrations\202408190812511_UpdateRecipeIngredientRelationship.Designer.cs">
+      <DependentUpon>202408190812511_UpdateRecipeIngredientRelationship.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -351,6 +367,9 @@
     <Content Include="Views\Ingredient\Error.cshtml" />
     <Content Include="Views\Home\Recipes.cshtml" />
     <Content Include="Views\Recipe\ListByCategory.cshtml" />
+    <Content Include="Views\Exercise\Create.cshtml" />
+    <Content Include="Views\Exercise\Edit.cshtml" />
+    <Content Include="Views\Exercise\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -392,6 +411,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202408030123157_recipe.resx">
       <DependentUpon>202408030123157_recipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408170114126_AddYouTubeUrlToExercise.resx">
+      <DependentUpon>202408170114126_AddYouTubeUrlToExercise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408170156564_AddYouTubeUrlToWorkOutPlan.resx">
+      <DependentUpon>202408170156564_AddYouTubeUrlToWorkOutPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408180635072_images.resx">
+      <DependentUpon>202408180635072_images.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408190812511_UpdateRecipeIngredientRelationship.resx">
+      <DependentUpon>202408190812511_UpdateRecipeIngredientRelationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -26,7 +26,7 @@ namespace FitFeastExplore.Controllers
         /// <example>
         /// GET: api/Tourdata/ListTours
         /// </example>
-        [HttpGet]
+        /* [HttpGet]
         public List<TourDto> ListTours()
         {
             List<Tour> Tours = db.Tours.ToList();
@@ -42,7 +42,45 @@ namespace FitFeastExplore.Controllers
             }));
 
             return TourDtos;
+        } */
+
+        /// <summary>
+        /// Searches for tours based on advanced criteria: name, location, and price range.
+        /// </summary>
+        /// <param name="searchString">The search string to filter by tour name or description.</param>
+        /// <param name="location">The location to filter tours.</param>
+        /// <param name="minPrice">The minimum price to filter tours.</param>
+        /// <param name="maxPrice">The maximum price to filter tours.</param>
+        /// <returns>A list of TourDto objects that match the search criteria.</returns>
+        [HttpGet]
+        [Route("api/TourData/ListTours")]
+        public IEnumerable<TourDto> ListTours(string searchString = "")
+        {
+            var tours = from t in db.Tours
+                        select t;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                decimal price;
+                // Check if the search string can be converted to a decimal for price search
+                bool isPriceSearch = Decimal.TryParse(searchString, out price);
+
+                tours = tours.Where(t => t.Tourname.Contains(searchString) ||
+                                         t.Location.Contains(searchString) ||
+                                         (isPriceSearch && t.Price == price));
+            }
+
+            return tours.ToList().Select(t => new TourDto
+            {
+                Tourid = t.Tourid,
+                Tourname = t.Tourname,
+                Description = t.Description,
+                Location = t.Location,
+                Price = t.Price
+            });
         }
+
+
 
         /// <summary>
         /// Gathers information about tour information related to a particular tour

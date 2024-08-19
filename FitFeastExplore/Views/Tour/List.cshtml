@@ -3,25 +3,34 @@
     ViewBag.Title = "List";
 }
 
-
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <h2 class="text-center mb-4">Tour List</h2>
             <form method="get" action="/Tour/List">
-                <div class="input-group mb-3">
-                    <input type="text" name="searchString" class="form-control" value="@ViewBag.search" placeholder="Search by customer name..." />
+                <div class=" input-group mb-3">
+                    <input type="text" name="searchString" class="form-control" value="@ViewBag.search" placeholder="Search by name, location, or price..." />
                     <button class="btn btn-primary" type="submit">Search</button>
                 </div>
+              
             </form>
-            @foreach (var tour in Model)
+
+            @if (Model.Any())
             {
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h3 class="card-title"><a href="/Tour/Show/@tour.Tourid">@tour.Tourname</a></h3>
-                        <p class="card-text">Price: $ @tour.Price</p>
+                foreach (var tour in Model)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="/Tour/Show/@tour.Tourid">@tour.Tourname</a></h3>
+                            <p class="card-text">Location: @tour.Location</p>
+                            <p class="card-text">Price: $@tour.Price</p>
+                        </div>
                     </div>
-                </div>
+                }
+            }
+            else
+            {
+                <p>No tours found matching your criteria.</p>
             }
         </div>
     </div>
